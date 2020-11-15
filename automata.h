@@ -2,7 +2,7 @@
 #ifndef AUTOMATA_H_
 #define AUTOMATA_H_
 
-bool determineNewCell(bool left, bool mid, bool right);
+bool determineNewCell(bool left, bool mid, bool right, bool ruleset[]);
 
 int printCells(bool cells[], int width);
 

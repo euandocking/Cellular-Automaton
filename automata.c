@@ -7,7 +7,7 @@
  * a lot of the elses are redundant just now but they'll be necessary if we want to extend 
  * the method to cover different rules later
  */
-bool determineNewCell(bool left, bool mid, bool right)
+bool determineNewCell(bool left, bool mid, bool right, bool ruleset[])
 {
     //if the value to the top left is true
     if (left == true)
@@ -18,12 +18,12 @@ bool determineNewCell(bool left, bool mid, bool right)
             //if the value to the top right is true
             if (right == true)
             {
-                return false;
+                return ruleset[0];
             }
             //if the value to the top right is false
             else
             {
-                return false;
+                return ruleset[1];
             }
         }
         //if the value to the top middle is false
@@ -32,12 +32,12 @@ bool determineNewCell(bool left, bool mid, bool right)
             //if the value to the top right is true
             if (right == true)
             {
-                return false;
+                return ruleset[2];
             }
             //if the value to the top right is false
             else
             {
-                return true;
+                return ruleset[3];
             }
         }
     }
@@ -50,12 +50,12 @@ bool determineNewCell(bool left, bool mid, bool right)
             //if the value to the top right is true
             if (right == true)
             {
-                return true;
+                return ruleset[4];
             }
             //if the value to the top right is false
             else
             {
-                return true;
+                return ruleset[5];
             }
         }
         //if the value to the top middle is false
@@ -64,12 +64,12 @@ bool determineNewCell(bool left, bool mid, bool right)
             //if the value to the top right is true
             if (right == true)
             {
-                return true;
+                return ruleset[6];
             }
             //if the value to the top right is false
             else
             {
-                return false;
+                return ruleset[7];
             }
         }
     }
@@ -107,8 +107,14 @@ int printCells(bool cells[], int width)
  */
 void generateAutomata()
 {
+    //define the ruleset in use - currently 30
+    bool ruleset[8] = {false, false, false, true, true, true, true, false};
+
     //set the width of cell generations
     int width = 31;
+
+    //set the number of generations to create
+    int length = 10;
 
     //create the initial generation of cells
     bool cells[width];
@@ -128,27 +134,26 @@ void generateAutomata()
     //create an array for the next generation of cells
     bool newCells[width];
 
-    //repeat 10 times
-    for (int i = 0; i < 15; i++)
+    //repeat for each desired generation
+    for (int i = 0; i < length; i++)
     {
         //As a note - we probably want to make a function for determining every cell in a generation
         //but I had trouble passing an array by reference
 
         //determine the first cell
         //the cell to the top left wraps to be the last cell in the generation
-        newCells[0] = determineNewCell(cells[width-1], cells[0], cells[1]);
+        newCells[0] = determineNewCell(cells[width-1], cells[0], cells[1], ruleset);
 
         //determine the cells inbetween the first and last
         for (int i = 1; i < width-1; i++)
         {
-            newCells[i] = determineNewCell(cells[i-1], cells[i], cells[i+1]);
+            newCells[i] = determineNewCell(cells[i-1], cells[i], cells[i+1], ruleset);
         }
       
         //determine the last cell
         //the cell to the top right wraps to be the first cell in the generation
-        newCells[width-1] = determineNewCell(cells[width-2], cells[width-1], cells[0]);
+        newCells[width-1] = determineNewCell(cells[width-2], cells[width-1], cells[0], ruleset);
         
-
         //for every cell in the generation
         for (int i = 0; i < width; i++)
         {

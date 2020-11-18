@@ -105,16 +105,10 @@ int printCells(bool cells[], int width)
 /**
  * main method
  */
-void generateAutomata()
+void generateAutomata(int width, int length)
 {
     //define the ruleset in use - currently 30
     bool ruleset[8] = {false, false, false, true, true, true, true, false};
-
-    //set the width of cell generations
-    int width = 31;
-
-    //set the number of generations to create
-    int length = 10;
 
     //create the initial generation of cells
     bool cells[width];
@@ -126,7 +120,7 @@ void generateAutomata()
     }
 
     //set one cell to true
-    cells[16] = true;
+    cells[0] = true;
 
     //print the cells
     printCells(cells, width);

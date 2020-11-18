@@ -6,6 +6,8 @@ bool determineNewCell(bool left, bool mid, bool right, bool ruleset[]);
 
 int printCells(bool cells[], int width);
 
+int saveCells(bool cells[], int width);
+
 void generateAutomata(int width, int length);
 
 #endif

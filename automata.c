@@ -103,6 +103,42 @@ int printCells(bool cells[], int width)
 }
 
 /**
+* Saves the automaton to a file
+*/
+int saveCells(bool cells[], int width)
+{
+    //string to put characters into and to print into the file
+    char cellStr[width];
+
+    //create a file pointer
+    FILE *fp = fopen("output.txt", "a");
+
+    //for every cell
+    for (int i = 0; i < width; i++)
+    {
+        //if the cell is true
+        if (cells[i] == true)
+        {
+            //print x
+            cellStr[i] = 'x';        }
+        //if the cell is false
+        else
+        {
+            //print -
+            cellStr[i] = '-'; 
+        }
+    }
+    //write the string of characters into the file
+    fputs(cellStr, fp);
+    //newline character
+    fputc('\n', fp);
+    //close the file
+    fclose(fp);
+    
+    return 0;
+}
+
+/**
  * main method
  */
 void generateAutomata(int width, int length)
@@ -118,12 +154,14 @@ void generateAutomata(int width, int length)
     {
         cells[i] = false;
     }
+        //As a note - we probably want to make a function for determining every cell in a g
 
     //set one cell to true
     cells[0] = true;
 
-    //print the cells
+    //print and save the cells
     printCells(cells, width);
+    saveCells(cells, width);
 
     //create an array for the next generation of cells
     bool newCells[width];
@@ -156,5 +194,7 @@ void generateAutomata(int width, int length)
         }
         //print the cells
         printCells(cells, width);
+        //save the cells to a file
+        saveCells(cells, width);
     }
 }

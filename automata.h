@@ -8,6 +8,6 @@ int printCells(bool cells[], int width);
 
 int saveCells(bool cells[], int width);
 
-void generateAutomata(int width, int length);
+void generateAutomata(int width, int length, bool fgen[], bool ruleset[], char filename[]);
 
 #endif

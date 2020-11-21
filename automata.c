@@ -141,24 +141,8 @@ int saveCells(bool cells[], int width)
 /**
  * main method
  */
-void generateAutomata(int width, int length)
+void generateAutomata(int width, int length, bool cells[], bool ruleset[], char filename[])
 {
-    //define the ruleset in use - currently 30
-    bool ruleset[8] = {false, false, false, true, true, true, true, false};
-
-    //create the initial generation of cells
-    bool cells[width];
-
-    //set every cell to false
-    for (int i = 0; i < width; i++)
-    {
-        cells[i] = false;
-    }
-        //As a note - we probably want to make a function for determining every cell in a g
-
-    //set one cell to true
-    cells[0] = true;
-
     //print and save the cells
     printCells(cells, width);
     saveCells(cells, width);

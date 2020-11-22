@@ -105,13 +105,13 @@ int printCells(bool cells[], int width)
 /**
 * Saves the automaton to a file
 */
-int saveCells(bool cells[], int width)
+int saveCells(bool cells[], int width, char filename[])
 {
     //string to put characters into and to print into the file
     char cellStr[width];
 
     //create a file pointer
-    FILE *fp = fopen("output.txt", "a");
+    FILE *fp = fopen(filename, "a");
 
     //for every cell
     for (int i = 0; i < width; i++)
@@ -145,7 +145,7 @@ void generateAutomata(int width, int length, bool cells[], bool ruleset[], char 
 {
     //print and save the cells
     printCells(cells, width);
-    saveCells(cells, width);
+    saveCells(cells, width, filename);
 
     //create an array for the next generation of cells
     bool newCells[width];
@@ -179,6 +179,6 @@ void generateAutomata(int width, int length, bool cells[], bool ruleset[], char 
         //print the cells
         printCells(cells, width);
         //save the cells to a file
-        saveCells(cells, width);
+        saveCells(cells, width, filename);
     }
 }
